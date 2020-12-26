@@ -1,0 +1,50 @@
+button {
+    background-color: #16cc9b;
+    border: 2px solid #16cc9b;
+    color: #ffffff;
+    transition: all 0.25s linear;
+    cursor: pointer;
+  }
+  
+  button::after {
+    position: relative;
+    right: 0;
+    content: " \276f";
+    transition: all 0.15s linear;
+  }
+  
+  button:hover {
+    background-color: #f58551;
+    border-color: #f58551;
+  }
+  
+  button:hover::after {
+    right: -5px;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  .btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+} 

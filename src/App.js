@@ -1,7 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import Button from './components/Button';
+import Products from './components/Products';
+import Summary from './components/Summary';
 
 function App() {
+  let products = [
+    { productName: 'Product Item Number 1', description: 'Description for product item number 1', quantity: 1, price: 5000000, vat: 5, image: 'https://via.placeholder.com/200x150' },
+    { productName: 'Product Item Number 2', description: 'Description for product item number 2', quantity: 1, price: 6000000, vat: 5, image: 'https://via.placeholder.com/200x150' },
+    { productName: 'Product Item Number 3', description: 'Description for product item number 3', quantity: 1, price: 7000000, vat: 5, image: 'https://via.placeholder.com/200x150' },
+    { productName: 'Product Item Number 4', description: 'Description for product item number 4', quantity: 1, price: 8000000, vat: 5, image: 'https://via.placeholder.com/200x150' },
+    { productName: 'Product Item Number 5', description: 'Description for product item number 5', quantity: 1, price: 10000000, vat: 0, image: 'https://via.placeholder.com/200x150' }
+  ]
   return (
       <div alt = "true">
         <meta charSet="UTF-8" />
@@ -16,82 +26,19 @@ function App() {
               <li alt = "true">Home</li>
               <li alt = "true">Shopping Cart</li>
             </ul>
-            <span className="count">3 items in the bag</span>
+            <span className="count">{products.length} items in the bag</span>
           </header>
           <section className="container" alt = "true">
-            <ul className="products" alt = "true">
-              <li className="row" alt = "true">
-                <div className="col left" alt = "true">
-                  <div className="thumbnail" alt = "true">
-                    <a href="#" alt = "true">
-                      <img src="https://via.placeholder.com/200x150"  alt = "true" />
-                    </a>
-                  </div>
-                  <div className="detail" alt = "true">
-                    <div className="name" alt = "true">
-                      <a href="#" alt = "true">PRODUCT ITEM NUMBER 1</a>
-                    </div>
-                    <div className="description" alt = "true">
-                      Description for product item number 1
-                    </div>
-                    <div className="price" alt = "true">$5.99</div>
-                  </div>
-                </div>
-                <div className="col right" alt = "true">
-                  <div className="quantity" alt = "true">
-                    <input type="number" className="quantity" step={1} defaultValue={2} />
-                  </div>
-                  <div className="remove" alt = "true">
-                    <svg version="1.1" className="close" xmlns="//www.w3.org/2000/svg" xmlnsXlink="//www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" enableBackground="new 0 0 60 60" xmlSpace="preserve">
-                      <polygon points="38.936,23.561 36.814,21.439 30.562,27.691 24.311,21.439 22.189,23.561 28.441,29.812 22.189,36.064 24.311,38.186 30.562,31.934 36.814,38.186 38.936,36.064 32.684,29.812" />
-                    </svg>
-                  </div>
-                </div>
-              </li>
-              <li className="row" alt = "true">
-                <div className="col left" alt = "true">
-                  <div className="thumbnail" alt = "true">
-                    <a href="#" alt = "true">
-                      <img src="https://via.placeholder.com/200x150"  alt = "true" />
-                    </a>
-                  </div>
-                  <div className="detail" alt = "true">
-                    <div className="name" alt = "true">
-                      <a href="#" alt = "true">PRODUCT ITEM NUMBER 2</a>
-                    </div>
-                    <div className="description" alt = "true">
-                      Description for product item number 2
-                    </div>
-                    <div className="price" alt = "true">$9.99</div>
-                  </div>
-                </div>
-                <div className="col right" alt = "true">
-                  <div className="quantity" alt = "true">
-                    <input type="number" className="quantity" step={1} defaultValue={1} />
-                  </div>
-                  <div className="remove" alt = "true">
-                    <svg version="1.1" className="close" xmlns="//www.w3.org/2000/svg" xmlnsXlink="//www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" enableBackground="new 0 0 60 60" xmlSpace="preserve">
-                      <polygon points="38.936,23.561 36.814,21.439 30.562,27.691 24.311,21.439 22.189,23.561 28.441,29.812 22.189,36.064 24.311,38.186 30.562,31.934 36.814,38.186 38.936,36.064 32.684,29.812" />
-                    </svg>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            <Products listProducts = {products}/>
           </section>
           <section className="container" alt = "true">
             <div className="promotion" alt = "true">
               <label htmlFor="promo-code">Have A Promo Code?</label>
-              <input type="text" id="promo-code" /> <button type="button" />
+              <input type="text" id="promo-code" /> <Button/>
             </div>
-            <div className="summary" alt = "true">
-              <ul alt = "true">
-                <li alt = "true">Subtotal <span>$21.97</span></li>
-                <li alt = "true">Tax <span>$5.00</span></li>
-                <li className="total" alt = "true">Total <span>$26.97</span></li>
-              </ul>
-            </div>
+            <Summary listProducts={products}/>
             <div className="checkout" alt = "true">
-              <button type="button">Check Out</button>
+              <Button text = "Check Out"/>
             </div>
           </section>
         </main>
