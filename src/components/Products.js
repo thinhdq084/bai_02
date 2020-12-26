@@ -4,6 +4,12 @@ import './Products.css'
 
 class Products extends Component {
     render() { 
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'VND',
+            minimumFractionDigits: 0
+        })
+
         return (
             <ul className="products" alt = "true">
                 {this.props.listProducts.map(element => {
@@ -13,7 +19,7 @@ class Products extends Component {
                             productName = {element.productName}
                             description = {element.description}
                             quantity = {element.quantity}
-                            price = {element.price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}
+                            price = {formatter.format(element.price)}
                             vat = {element.vat}
                         /> 
                     )

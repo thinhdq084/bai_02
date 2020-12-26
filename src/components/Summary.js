@@ -18,13 +18,19 @@ class Summary extends Component {
             grandMonney += itemMonney + itemMonney * item.vat / 100;
         });
 
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'VND',
+            minimumFractionDigits: 0
+          })
+
         return (
             <div className="summary" alt = "true">
                 <ul alt = "true">
-                    <li alt = "true">Total quantity: <span>{totalQuantity.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</span></li>
-                    <li alt = "true">Total amount: <span>{totalMonney.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</span></li>
-                    <li alt = "true">VAT amount: <span>{totalTax.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</span></li>
-                    <li alt = "true">Grand total: <span>{grandMonney.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</span></li>
+                    <li alt = "true">Total quantity: <span>{totalQuantity}</span></li>
+                    <li alt = "true">Total amount: <span>{formatter.format(totalMonney)}</span></li>
+                    <li alt = "true">VAT amount: <span>{formatter.format(totalTax)}</span></li>
+                    <li alt = "true">Grand total: <span>{formatter.format(grandMonney)}</span></li>
                 </ul>
             </div>
         );
