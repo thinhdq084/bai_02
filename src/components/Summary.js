@@ -1,30 +1,34 @@
-import React, { Component } from "react";
-// import {FormattedNumber} from 'react-intl';
-import "./Summary.css";
+import React from "react";
+import Button from "./Button";
 
-class Summary extends Component {
-  render() {
-    let totalQuantity = 0;
-    let itemMonney = 0;
-    let totalMonney = 0;
-    let grandMonney = 0;
-    let totalTax = 0;
+function Summary({ listProducts }) {
+  //   render() {
+  let totalQuantity = 0;
+  let itemMonney = 0;
+  let totalMonney = 0;
+  let grandMonney = 0;
+  let totalTax = 0;
 
-    this.props.listProducts.map(function (item) {
-      totalQuantity += item.quantity;
-      itemMonney = item.price * item.quantity;
-      totalMonney += itemMonney;
-      totalTax += (itemMonney * item.vat) / 100;
-      grandMonney += itemMonney + (itemMonney * item.vat) / 100;
-    });
+  listProducts.map(function (item) {
+    totalQuantity += item.quantity;
+    itemMonney = item.price * item.quantity;
+    totalMonney += itemMonney;
+    totalTax += (itemMonney * item.vat) / 100;
+  });
+  grandMonney = totalMonney + totalTax;
 
-    const formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "VND",
-      minimumFractionDigits: 0,
-    });
+  const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    minimumFractionDigits: 2,
+  });
 
-    return (
+  return (
+    <section className="container">
+      <div className="promotion">
+        <label htmlFor="promo-code">Have A Promo Code?</label>
+        <input type="text" id="promo-code" /> <Button/>
+      </div>
       <div className="summary">
         <ul>
           <li>
@@ -41,8 +45,12 @@ class Summary extends Component {
           </li>
         </ul>
       </div>
-    );
-  }
+      <div className="checkout">
+        <Button text="Check Out" />
+      </div>
+    </section>
+  );
+  //   }
 }
 
 export default Summary;

@@ -1,85 +1,91 @@
+import { useState } from "react";
 import "./App.css";
-import Button from "./components/Button";
-import Products from "./components/Products";
+import Header from "./components/Header";
+import Product from "./components/Product";
 import Summary from "./components/Summary";
 
 function App() {
   let products = [
     {
-      key: "1",
+      key: "key1",
       productName: "Product Item Number 1",
       description: "Description for product item number 1",
       quantity: 1,
-      price: 5000000,
+      price: 1.234,
       vat: 5,
       image: "https://via.placeholder.com/200x150",
     },
     {
-      key: "2",
+      key: "key2",
       productName: "Product Item Number 2",
       description: "Description for product item number 2",
-      quantity: 1,
-      price: 6000000,
+      quantity: 2,
+      price: 2.453,
       vat: 5,
       image: "https://via.placeholder.com/200x150",
     },
     {
-      key: "3",
+      key: "key3",
       productName: "Product Item Number 3",
       description: "Description for product item number 3",
-      quantity: 1,
-      price: 7000000,
+      quantity: 3,
+      price: 3.4578,
       vat: 5,
       image: "https://via.placeholder.com/200x150",
     },
     {
-      key: "4",
+      key: "key4",
       productName: "Product Item Number 4",
       description: "Description for product item number 4",
-      quantity: 1,
-      price: 8000000,
+      quantity: 4,
+      price: 4.21432,
       vat: 5,
       image: "https://via.placeholder.com/200x150",
     },
     {
-      key: "5",
+      key: "key5",
       productName: "Product Item Number 5",
       description: "Description for product item number 5",
-      quantity: 1,
-      price: 10000000,
+      quantity: 5,
+      price: 5.32432,
       vat: 0,
       image: "https://via.placeholder.com/200x150",
     },
   ];
+  let [listProduct, setProducts] = useState(products);
+
+  function removeProduct(Name) {
+    let tempProducts = listProduct;
+
+    setProducts((tempProducts) => {
+      return tempProducts.filter((product) => product.productName !== Name);
+    });
+  }
+
+  let itemProducts = [];
+  listProduct.forEach((element) => {
+    itemProducts.push(
+      <Product
+        key={element.key}
+        image={element.image}
+        productName={element.productName}
+        description={element.description}
+        quantity={element.quantity}
+        price={element.price}
+        vat={element.vat}
+        onRemoveProduct={removeProduct}
+      />
+    );
+  });
+
   return (
-    <div alt="true">
-      <meta charSet="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-      <title>Shopping Cart</title>
-      <link rel="stylesheet" href="style.css" />
-      <main alt="true">
-        <header className="container">
-          <h1>Shopping Cart</h1>
-          <ul className="breadcrumb" alt="true">
-            <li alt="true">Home</li>
-            <li alt="true">Shopping Cart</li>
-          </ul>
-          <span className="count">{products.length} items in the bag</span>
-        </header>
-        <section className="container" alt="true">
-          <Products listProducts={products} />
+    <div>
+      <main>
+        <Header listProducts={listProduct} />
+        <section className="container">
+          <ul className="products">{itemProducts}</ul>
         </section>
-        <section className="container" alt="true">
-          <div className="promotion" alt="true">
-            <label htmlFor="promo-code">Have A Promo Code?</label>
-            <input type="text" id="promo-code" /> <Button />
-          </div>
-          <Summary listProducts={products} />
-          <div className="checkout" alt="true">
-            <Button text="Check Out" />
-          </div>
-        </section>
+        <Summary listProducts={listProduct} />
       </main>
     </div>
   );
