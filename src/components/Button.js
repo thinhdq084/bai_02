@@ -1,8 +1,12 @@
 import React from "react";
-function Button({ text }) {
+function Button({displayText, promotionClick}) {
   return (
-    <button type="button" className="btn btn-success">
-      {text}
+    <button
+      type="button"
+      className="btn btn-success"
+      onClick={promotionClick}
+    >
+      {displayText}
     </button>
   );
 }

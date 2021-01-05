@@ -1,7 +1,8 @@
 import React from "react";
+import { VNDCurrencyFormat } from "./NumberFormat";
+import classes from "./Product.module.css";
 
 function Product({
-  key,
   image,
   productName,
   description,
@@ -9,14 +10,8 @@ function Product({
   vat,
   quantity,
   onRemoveProduct,
+  onChangedQuantity,
 }) {
-  //   render() {
-  const formatter = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-    minimumFractionDigits: 2,
-  });
-
   return (
     <li className="row">
       <div className="col left">
@@ -29,8 +24,8 @@ function Product({
           <div className="name">
             <a href="#">{productName}</a>
           </div>
-          <div className="description">{description}</div>
-          <div className="price">Price: {formatter.format(price)}</div>
+          <div className={classes.listProductDescription}>{description}</div>
+          <div className="price">Price: {VNDCurrencyFormat(price)}</div>
           <div className="vat">VAT: {vat}%</div>
         </div>
       </div>
@@ -41,6 +36,7 @@ function Product({
             className="quantity"
             step={1}
             defaultValue={quantity}
+            onChange={(x) => onChangedQuantity(productName, x.target.value)}
           />
         </div>
         <div className="remove">
