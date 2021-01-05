@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { VNDCurrencyFormat } from "./NumberFormat";
 import { getPromotionCode } from "./listPromotionCode";
+import classes from "./Summary.module.css";
 
 function Summary({ listProducts }) {
   // let promotions = getPromotionCode();
@@ -43,8 +44,11 @@ function Summary({ listProducts }) {
   let itemDiscount = "";
   if (perDiscount > 0) {
     itemDiscount = (
-      <li>
-        Discount: <span>{VNDCurrencyFormat(Discount)}</span>
+      <li className={classes.discountDisplay}>
+        Discount:{" "}
+        <span>
+          {VNDCurrencyFormat(Discount)}
+        </span>
       </li>
     );
   }
