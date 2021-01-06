@@ -26,8 +26,8 @@ function App() {
   }
 
   let itemProducts = [];
-  listProduct.forEach((element) => {
-    itemProducts.push(
+  itemProducts = listProduct.map((element) => {
+    return (
       <Product
         key={element.key}
         image={element.image}
