@@ -1,10 +1,7 @@
 import React from "react";
 
 function Header({ listProducts }) {
-  let totalProduct = 0;
-  listProducts.map(function (item) {
-    totalProduct += item.quantity;
-  });
+  let totalProduct = listProducts.reduce((total, product) => total + product.quantity, 0);
 
   return (
     <header className="container">

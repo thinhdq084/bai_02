@@ -10,21 +10,16 @@ function Summary({ listProducts }) {
   let [proCode, setPromotionCode] = useState("");
   let [perDiscount, setPromotionDiscount] = useState(0);
 
-  let totalQuantity = 0;
-  let itemMonney = 0;
-  let totalMonney = 0;
-  let grandMonney = 0;
-  let totalTax = 0;
-  let Discount = 0;
+  let totalQuantity = listProducts.reduce((total, product) => total + product.quantity, 0);
+  let totalMonney = listProducts.reduce((total, product) => total + product.quantity * product.price, 0);
+  let totalTax = listProducts.reduce(
+    (total, product) => total + (product.quantity * product.price * product.vat) / 100,
+    0
+  );
 
-  listProducts.map((item) => {
-    totalQuantity += item.quantity;
-    itemMonney = item.price * item.quantity;
-    totalMonney += itemMonney;
-    totalTax += (itemMonney * item.vat) / 100;
-  });
-  grandMonney = totalMonney + totalTax;
-  Discount = (grandMonney * perDiscount) / 100;
+  let grandMonney = totalMonney + totalTax;
+  let Discount =(grandMonney * perDiscount) / 100;
+
   grandMonney = grandMonney - Discount;
 
   function changedPromotionCode(event) {
@@ -33,11 +28,9 @@ function Summary({ listProducts }) {
 
   function promotionClick() {
     setPromotionDiscount(0);
-    promotions.map((item) => {
-      if (item.promotionCode === proCode) {
-        setPromotionDiscount(item.percentDiscount);
-      }
-    });
+    setPromotionDiscount(
+      promotions.find((e) => e.promotionCode === proCode).percentDiscount
+    );
     setPromotionCode("");
   }
 
@@ -45,10 +38,7 @@ function Summary({ listProducts }) {
   if (perDiscount > 0) {
     itemDiscount = (
       <li className={classes.discountDisplay}>
-        Discount:{" "}
-        <span>
-          {VNDCurrencyFormat(Discount)}
-        </span>
+        Discount: <span>{VNDCurrencyFormat(Discount)}</span>
       </li>
     );
   }
