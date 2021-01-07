@@ -10,15 +10,22 @@ function Summary({ listProducts }) {
   let [proCode, setPromotionCode] = useState("");
   let [perDiscount, setPromotionDiscount] = useState(0);
 
-  let totalQuantity = listProducts.reduce((total, product) => total + product.quantity, 0);
-  let totalMonney = listProducts.reduce((total, product) => total + product.quantity * product.price, 0);
+  let totalQuantity = listProducts.reduce(
+    (total, product) => total + product.quantity,
+    0
+  );
+  let totalMonney = listProducts.reduce(
+    (total, product) => total + product.quantity * product.price,
+    0
+  );
   let totalTax = listProducts.reduce(
-    (total, product) => total + (product.quantity * product.price * product.vat) / 100,
+    (total, product) =>
+      total + (product.quantity * product.price * product.vat) / 100,
     0
   );
 
   let grandMonney = totalMonney + totalTax;
-  let Discount =(grandMonney * perDiscount) / 100;
+  let Discount = (grandMonney * perDiscount) / 100;
 
   grandMonney = grandMonney - Discount;
 
@@ -28,9 +35,10 @@ function Summary({ listProducts }) {
 
   function promotionClick() {
     setPromotionDiscount(0);
-    setPromotionDiscount(
-      promotions.find((e) => e.promotionCode === proCode).percentDiscount
-    );
+    let product = promotions.find((promo) => promo.promotionCode === proCode);
+    if (product != null) {
+      setPromotionDiscount(product.percentDiscount);
+    }
     setPromotionCode("");
   }
 
